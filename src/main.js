@@ -1,5 +1,19 @@
 import './style.css'
 
+// Function to get next occurrence of a date
+function getNextOccurrence(month, day, hour = 0, minute = 0) {
+    const now = new Date();
+    const currentYear = now.getFullYear();
+    let targetDate = new Date(currentYear, month - 1, day, hour, minute, 0);
+    
+    // If the date has already passed this year, use next year
+    if (targetDate <= now) {
+        targetDate = new Date(currentYear + 1, month - 1, day, hour, minute, 0);
+    }
+    
+    return targetDate;
+}
+
 // Data for events
 const events = [
     {
@@ -9,17 +23,17 @@ const events = [
     },
     {
         name: "Día de San Valentín",
-        date: new Date("2025-02-14T00:00:00"),
+        date: getNextOccurrence(2, 14), // February 14
         description: "El día del amor y la amistad"
     },
     {
         name: "Fiestas Patrias Chile",
-        date: new Date("2025-09-18T00:00:00"),
+        date: getNextOccurrence(9, 18), // September 18
         description: "Celebración de la independencia de Chile"
     },
     {
-        name: "Navidad 2025",
-        date: new Date("2025-12-25T00:00:00"),
+        name: "Navidad",
+        date: getNextOccurrence(12, 25), // December 25
         description: "La celebración navideña"
     }
 ];
@@ -713,4 +727,273 @@ function openModal(modalId, content) {
     contentElement.innerHTML = content;
     modal.style.display = 'block';
 }
+
+
+
+// Mini Games JavaScript
+
+// Date Game Variables
+let dateScore = 0;
+let currentDateQuestion = 0;
+
+const dateQuestions = [
+    {
+        question: "¿En qué fecha se celebra el Día de la Independencia de Chile?",
+        options: ["16 de Septiembre", "18 de Septiembre", "21 de Septiembre"],
+        correct: 1
+    },
+    {
+        question: "¿Cuándo se celebra el Día de San Valentín?",
+        options: ["14 de Febrero", "15 de Febrero", "13 de Febrero"],
+        correct: 0
+    },
+    {
+        question: "¿En qué fecha es Navidad?",
+        options: ["24 de Diciembre", "25 de Diciembre", "26 de Diciembre"],
+        correct: 1
+    },
+    {
+        question: "¿Cuándo se celebra el Año Nuevo?",
+        options: ["31 de Diciembre", "1 de Enero", "2 de Enero"],
+        correct: 1
+    },
+    {
+        question: "¿En qué fecha se celebra el Día de la Madre en Chile?",
+        options: ["Primer domingo de Mayo", "Segundo domingo de Mayo", "Tercer domingo de Mayo"],
+        correct: 1
+    }
+];
+
+// Date Game Functions
+function checkDateAnswer(button, isCorrect) {
+    const buttons = button.parentElement.querySelectorAll('.game-btn');
+    buttons.forEach(btn => {
+        btn.disabled = true;
+        if (btn === button) {
+            btn.classList.add(isCorrect ? 'correct' : 'incorrect');
+        }
+    });
+    
+    if (isCorrect) {
+        dateScore += 10;
+        document.getElementById('date-score').textContent = dateScore;
+    }
+    
+    setTimeout(() => {
+        nextDateQuestion();
+    }, 1500);
+}
+
+function nextDateQuestion() {
+    currentDateQuestion = (currentDateQuestion + 1) % dateQuestions.length;
+    const question = dateQuestions[currentDateQuestion];
+    
+    const questionElement = document.getElementById('date-question');
+    questionElement.innerHTML = `
+        <p>${question.question}</p>
+        <div class="game-options">
+            ${question.options.map((option, index) => 
+                `<button class="game-btn" onclick="checkDateAnswer(this, ${index === question.correct})">${option}</button>`
+            ).join('')}
+        </div>
+    `;
+}
+
+function resetDateGame() {
+    dateScore = 0;
+    currentDateQuestion = 0;
+    document.getElementById('date-score').textContent = dateScore;
+    nextDateQuestion();
+}
+
+// Time Calculator Functions
+function calculateTimeDifference() {
+    const startDate = new Date(document.getElementById('start-date').value);
+    const endDate = new Date(document.getElementById('end-date').value);
+    
+    if (!startDate || !endDate) {
+        document.getElementById('time-result').innerHTML = '<p>Por favor selecciona ambas fechas</p>';
+        return;
+    }
+    
+    if (startDate > endDate) {
+        document.getElementById('time-result').innerHTML = '<p>La fecha inicial debe ser anterior a la fecha final</p>';
+        return;
+    }
+    
+    const diffTime = Math.abs(endDate - startDate);
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    const diffWeeks = Math.floor(diffDays / 7);
+    const diffMonths = Math.floor(diffDays / 30.44);
+    const diffYears = Math.floor(diffDays / 365.25);
+    
+    let result = `<div style="text-align: left;">
+        <h4>Diferencia de tiempo:</h4>
+        <p><strong>${diffDays}</strong> días</p>
+        <p><strong>${diffWeeks}</strong> semanas</p>
+        <p><strong>${diffMonths}</strong> meses (aprox.)</p>
+        <p><strong>${diffYears}</strong> años (aprox.)</p>
+    </div>`;
+    
+    document.getElementById('time-result').innerHTML = result;
+}
+
+// Memory Game Variables
+let memoryCards = [];
+let flippedCards = [];
+let matchedPairs = 0;
+let moves = 0;
+let gameTime = 0;
+let gameTimer = null;
+
+const memorySymbols = ['🎉', '🎂', '🎈', '🎁', '🎊', '🎯', '🎪', '🎨'];
+
+// Memory Game Functions
+function initMemoryGame() {
+    const symbols = [...memorySymbols, ...memorySymbols];
+    symbols.sort(() => Math.random() - 0.5);
+    
+    const board = document.getElementById('memory-board');
+    board.innerHTML = '';
+    
+    symbols.forEach((symbol, index) => {
+        const card = document.createElement('div');
+        card.className = 'memory-card';
+        card.dataset.symbol = symbol;
+        card.dataset.index = index;
+        card.addEventListener('click', flipCard);
+        board.appendChild(card);
+    });
+    
+    memoryCards = document.querySelectorAll('.memory-card');
+    flippedCards = [];
+    matchedPairs = 0;
+    moves = 0;
+    gameTime = 0;
+    
+    document.getElementById('memory-moves').textContent = moves;
+    document.getElementById('memory-time').textContent = '00:00';
+    
+    if (gameTimer) clearInterval(gameTimer);
+    gameTimer = setInterval(updateGameTime, 1000);
+}
+
+function flipCard() {
+    if (flippedCards.length === 2) return;
+    if (this.classList.contains('flipped') || this.classList.contains('matched')) return;
+    
+    this.classList.add('flipped');
+    this.textContent = this.dataset.symbol;
+    flippedCards.push(this);
+    
+    if (flippedCards.length === 2) {
+        moves++;
+        document.getElementById('memory-moves').textContent = moves;
+        
+        setTimeout(checkMatch, 1000);
+    }
+}
+
+function checkMatch() {
+    const [card1, card2] = flippedCards;
+    
+    if (card1.dataset.symbol === card2.dataset.symbol) {
+        card1.classList.add('matched');
+        card2.classList.add('matched');
+        matchedPairs++;
+        
+        if (matchedPairs === memorySymbols.length) {
+            clearInterval(gameTimer);
+            setTimeout(() => {
+                alert(`¡Felicidades! Completaste el juego en ${moves} movimientos y ${document.getElementById('memory-time').textContent}`);
+            }, 500);
+        }
+    } else {
+        card1.classList.remove('flipped');
+        card2.classList.remove('flipped');
+        card1.textContent = '';
+        card2.textContent = '';
+    }
+    
+    flippedCards = [];
+}
+
+function updateGameTime() {
+    gameTime++;
+    const minutes = Math.floor(gameTime / 60).toString().padStart(2, '0');
+    const seconds = (gameTime % 60).toString().padStart(2, '0');
+    document.getElementById('memory-time').textContent = `${minutes}:${seconds}`;
+}
+
+function resetMemoryGame() {
+    if (gameTimer) clearInterval(gameTimer);
+    initMemoryGame();
+}
+
+// Event Generator Functions
+const eventThemes = [
+    "Años 80", "Tropical", "Elegante", "Casual", "Temático de Películas", 
+    "Retro", "Moderno", "Rústico", "Glamoroso", "Deportivo"
+];
+
+const eventActivities = [
+    "Karaoke y baile", "Juegos de mesa", "Concursos y premios", "Música en vivo",
+    "DJ y pista de baile", "Actividades al aire libre", "Talleres creativos",
+    "Espectáculo de talentos", "Juegos tradicionales", "Actividades deportivas"
+];
+
+const eventFoods = [
+    "Pizza y cóctel de frutas", "Asado y ensaladas", "Buffet internacional",
+    "Comida mexicana", "Sushi y sake", "Comida italiana", "BBQ y cerveza",
+    "Comida vegetariana", "Postres y café", "Comida chilena tradicional"
+];
+
+const eventDecorations = [
+    "Colores neón y globos metálicos", "Flores naturales y velas", "Luces LED y cortinas",
+    "Decoración rústica con madera", "Globos y serpentinas", "Temática de colores específicos",
+    "Decoración minimalista", "Elementos vintage", "Decoración tropical", "Temática elegante"
+];
+
+const eventTypes = [
+    "🎈 Fiesta de Cumpleaños Temática", "🎉 Celebración de Aniversario", "🎊 Fiesta de Graduación",
+    "🎁 Celebración Sorpresa", "🎪 Fiesta Familiar", "🎯 Evento Corporativo",
+    "🎨 Fiesta Creativa", "🎵 Fiesta Musical", "🍕 Reunión Casual", "✨ Celebración Especial"
+];
+
+function generateRandomEvent() {
+    const randomType = eventTypes[Math.floor(Math.random() * eventTypes.length)];
+    const randomTheme = eventThemes[Math.floor(Math.random() * eventThemes.length)];
+    const randomActivity = eventActivities[Math.floor(Math.random() * eventActivities.length)];
+    const randomFood = eventFoods[Math.floor(Math.random() * eventFoods.length)];
+    const randomDecoration = eventDecorations[Math.floor(Math.random() * eventDecorations.length)];
+    
+    document.getElementById('generated-event').innerHTML = `
+        <div class="event-suggestion">
+            <h4>${randomType}</h4>
+            <p><strong>Tema:</strong> ${randomTheme}</p>
+            <p><strong>Actividad:</strong> ${randomActivity}</p>
+            <p><strong>Comida:</strong> ${randomFood}</p>
+            <p><strong>Decoración:</strong> ${randomDecoration}</p>
+        </div>
+    `;
+}
+
+// Initialize games when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // Initialize memory game
+    if (document.getElementById('memory-board')) {
+        initMemoryGame();
+    }
+    
+    // Set default dates for time calculator
+    const today = new Date();
+    const nextWeek = new Date(today.getTime() + 7 * 24 * 60 * 60 * 1000);
+    
+    if (document.getElementById('start-date')) {
+        document.getElementById('start-date').value = today.toISOString().split('T')[0];
+    }
+    if (document.getElementById('end-date')) {
+        document.getElementById('end-date').value = nextWeek.toISOString().split('T')[0];
+    }
+});
 

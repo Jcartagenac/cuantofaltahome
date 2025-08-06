@@ -1,0 +1,22 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cuantofalta.cl/sitemap.xml
+
+# Specific pages
+Allow: /privacy.html
+Allow: /terms.html
+Allow: /guias.html
+
+# Assets
+Allow: /src/
+Allow: /assets/
+
+# Disallow admin or private areas (if any in the future)
+# Disallow: /admin/
+# Disallow: /private/
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
+

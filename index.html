@@ -3,12 +3,74 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>¿Cuánto Falta? - Descubre cuánto falta para tus momentos favoritos</title>
-    <meta name="description" content="Descubre cuánto tiempo falta para tus eventos favoritos, fechas especiales y momentos importantes. Cuentas regresivas precisas y personalizables.">
+    <title>¿Cuánto Falta? - Cuentas Regresivas Precisas para Chile y Latinoamérica</title>
+    <meta name="description" content="La plataforma más precisa para cuentas regresivas en Chile. Descubre cuánto falta para Año Nuevo, Fiestas Patrias, Navidad y tus eventos favoritos. Incluye juegos, guías y herramientas especializadas.">
+    <meta name="keywords" content="cuenta regresiva, cuanto falta, año nuevo, fiestas patrias, navidad, chile, eventos, celebraciones, cronometro, temporizador">
+    <meta name="author" content="¿Cuánto Falta? - Equipo Chile">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="Spanish">
+    <meta name="geo.region" content="CL">
+    <meta name="geo.country" content="Chile">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://cuantofalta.cl/">
+    <meta property="og:title" content="¿Cuánto Falta? - Cuentas Regresivas Precisas">
+    <meta property="og:description" content="La plataforma más precisa para cuentas regresivas en Chile. Descubre cuánto falta para tus eventos favoritos.">
+    <meta property="og:image" content="https://cuantofalta.cl/og-image.jpg">
+    <meta property="og:site_name" content="¿Cuánto Falta?">
+    <meta property="og:locale" content="es_CL">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://cuantofalta.cl/">
+    <meta property="twitter:title" content="¿Cuánto Falta? - Cuentas Regresivas Precisas">
+    <meta property="twitter:description" content="La plataforma más precisa para cuentas regresivas en Chile. Descubre cuánto falta para tus eventos favoritos.">
+    <meta property="twitter:image" content="https://cuantofalta.cl/og-image.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://cuantofalta.cl/">
+    
+    <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    
+    <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Stylesheet -->
+    <link rel="stylesheet" href="/src/style.css">
+    
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "¿Cuánto Falta?",
+        "url": "https://cuantofalta.cl/",
+        "description": "La plataforma más precisa para cuentas regresivas en Chile y Latinoamérica",
+        "publisher": {
+            "@type": "Organization",
+            "name": "¿Cuánto Falta?",
+            "url": "https://cuantofalta.cl/"
+        },
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://cuantofalta.cl/?q={search_term_string}",
+            "query-input": "required name=search_term_string"
+        },
+        "sameAs": [
+            "https://18.cuantofalta.cl/",
+            "https://asado.cuantofalta.cl/",
+            "https://bbq.cuantofalta.cl/",
+            "https://merluzo.cuantofalta.cl/"
+        ]
+    }
+    </script>
 </head>
 <body>
     <div id="app">
@@ -23,6 +85,9 @@
                         <a href="#inicio" class="nav-link">Inicio</a>
                         <a href="#nosotros" class="nav-link">Nosotros</a>
                         <a href="#eventos" class="nav-link">Eventos</a>
+                        <a href="#juegos" class="nav-link">Juegos</a>
+                        <a href="#especiales" class="nav-link">Especiales</a>
+                        <a href="/guias.html" class="nav-link">Guías</a>
                         <a href="#blog" class="nav-link">Blog</a>
                         <a href="#faq" class="nav-link">FAQ</a>
                         <a href="#contacto" class="nav-link">Contacto</a>
@@ -63,6 +128,178 @@
                             </div>
                         </div>
                         <p class="countdown-description" id="countdown-description">para el próximo año nuevo</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Mini Games Section -->
+            <section id="juegos" class="mini-games">
+                <div class="container">
+                    <h2 class="section-title">Juegos Interactivos</h2>
+                    <p class="section-description">Diviértete mientras esperas con nuestros juegos temáticos sobre celebraciones y tiempo.</p>
+                    
+                    <div class="games-grid">
+                        <div class="game-card">
+                            <h3>🎯 Adivina la Fecha</h3>
+                            <p>¿Qué tan bien conoces las fechas de celebraciones importantes?</p>
+                            <div class="game-container" id="date-game">
+                                <div class="game-question" id="date-question">
+                                    <p>¿En qué fecha se celebra el Día de la Independencia de Chile?</p>
+                                    <div class="game-options">
+                                        <button class="game-btn" onclick="checkDateAnswer(this, false)">16 de Septiembre</button>
+                                        <button class="game-btn" onclick="checkDateAnswer(this, true)">18 de Septiembre</button>
+                                        <button class="game-btn" onclick="checkDateAnswer(this, false)">21 de Septiembre</button>
+                                    </div>
+                                </div>
+                                <div class="game-score">
+                                    <span>Puntuación: <span id="date-score">0</span></span>
+                                    <button class="game-reset" onclick="resetDateGame()">Nuevo Juego</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <h3>⏰ Calculadora de Tiempo</h3>
+                            <p>Calcula cuánto tiempo ha pasado entre dos fechas importantes.</p>
+                            <div class="game-container" id="time-calculator">
+                                <div class="calculator-inputs">
+                                    <div class="input-group">
+                                        <label>Fecha inicial:</label>
+                                        <input type="date" id="start-date" class="date-input">
+                                    </div>
+                                    <div class="input-group">
+                                        <label>Fecha final:</label>
+                                        <input type="date" id="end-date" class="date-input">
+                                    </div>
+                                    <button class="calculate-btn" onclick="calculateTimeDifference()">Calcular</button>
+                                </div>
+                                <div class="calculator-result" id="time-result">
+                                    <p>Selecciona dos fechas para ver la diferencia</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <h3>🎉 Memoria de Celebraciones</h3>
+                            <p>Pon a prueba tu memoria con este juego de cartas temático.</p>
+                            <div class="game-container" id="memory-game">
+                                <div class="memory-board" id="memory-board">
+                                    <!-- Cards will be generated by JavaScript -->
+                                </div>
+                                <div class="memory-stats">
+                                    <span>Movimientos: <span id="memory-moves">0</span></span>
+                                    <span>Tiempo: <span id="memory-time">00:00</span></span>
+                                    <button class="game-reset" onclick="resetMemoryGame()">Reiniciar</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="game-card">
+                            <h3>🎲 Generador de Eventos</h3>
+                            <p>Genera ideas aleatorias para tus próximas celebraciones.</p>
+                            <div class="game-container" id="event-generator">
+                                <div class="generator-result" id="generated-event">
+                                    <div class="event-suggestion">
+                                        <h4>🎈 Fiesta de Cumpleaños Temática</h4>
+                                        <p><strong>Tema:</strong> Años 80</p>
+                                        <p><strong>Actividad:</strong> Karaoke y baile</p>
+                                        <p><strong>Comida:</strong> Pizza y cóctel de frutas</p>
+                                        <p><strong>Decoración:</strong> Colores neón y globos metálicos</p>
+                                    </div>
+                                </div>
+                                <button class="generate-btn" onclick="generateRandomEvent()">Generar Nueva Idea</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="games-benefits">
+                        <h3>¿Por qué jugar mientras esperas?</h3>
+                        <div class="benefits-grid">
+                            <div class="benefit-item">
+                                <h4>🧠 Estimula la Mente</h4>
+                                <p>Los juegos mantienen tu cerebro activo y mejoran la concentración mientras esperas tu evento especial.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h4>⏰ Hace el Tiempo más Ameno</h4>
+                                <p>La espera se vuelve más entretenida cuando tienes actividades divertidas que realizar.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h4>📚 Aprendes Jugando</h4>
+                                <p>Nuestros juegos están diseñados para enseñarte sobre fechas importantes y celebraciones.</p>
+                            </div>
+                            <div class="benefit-item">
+                                <h4>🎯 Desafía tus Conocimientos</h4>
+                                <p>Pon a prueba lo que sabes sobre tradiciones, fechas históricas y celebraciones mundiales.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Special Countdowns Section -->
+            <section id="especiales" class="special-countdowns">
+                <div class="container">
+                    <h2 class="section-title">Cuentas Regresivas Especiales</h2>
+                    <p class="section-description">Descubre nuestras cuentas regresivas temáticas especializadas para diferentes ocasiones y celebraciones únicas.</p>
+                    
+                    <div class="special-grid">
+                        <div class="special-item">
+                            <h3>🇨🇱 Fiestas Patrias</h3>
+                            <p>Cuenta regresiva especial para las Fiestas Patrias de Chile con información cultural y tradiciones.</p>
+                            <div class="iframe-container">
+                                <iframe src="https://18.cuantofalta.cl/" title="Cuenta Regresiva Fiestas Patrias Chile"></iframe>
+                            </div>
+                            <a href="https://18.cuantofalta.cl/" target="_blank" class="special-link">Ver en pantalla completa →</a>
+                        </div>
+
+                        <div class="special-item">
+                            <h3>🍖 Asado Perfecto</h3>
+                            <p>Cronómetro especializado para asados, con tiempos perfectos para diferentes tipos de carne.</p>
+                            <div class="iframe-container">
+                                <iframe src="https://asado.cuantofalta.cl/" title="Cronómetro para Asados"></iframe>
+                            </div>
+                            <a href="https://asado.cuantofalta.cl/" target="_blank" class="special-link">Ver en pantalla completa →</a>
+                        </div>
+
+                        <div class="special-item">
+                            <h3>🔥 BBQ Timer</h3>
+                            <p>Temporizador especializado para barbacoas, con guías de cocción para diferentes alimentos.</p>
+                            <div class="iframe-container">
+                                <iframe src="https://bbq.cuantofalta.cl/" title="Temporizador BBQ"></iframe>
+                            </div>
+                            <a href="https://bbq.cuantofalta.cl/" target="_blank" class="special-link">Ver en pantalla completa →</a>
+                        </div>
+
+                        <div class="special-item">
+                            <h3>🐟 Merluzo Timer</h3>
+                            <p>Cronómetro especializado para la cocción perfecta de pescados y mariscos.</p>
+                            <div class="iframe-container">
+                                <iframe src="https://merluzo.cuantofalta.cl/" title="Cronómetro para Pescados"></iframe>
+                            </div>
+                            <a href="https://merluzo.cuantofalta.cl/" target="_blank" class="special-link">Ver en pantalla completa →</a>
+                        </div>
+                    </div>
+
+                    <div class="special-features">
+                        <h3>¿Por qué usar nuestras herramientas especializadas?</h3>
+                        <div class="features-grid">
+                            <div class="feature-card">
+                                <h4>🎯 Precisión Especializada</h4>
+                                <p>Cada herramienta está diseñada específicamente para su propósito, con tiempos y configuraciones optimizadas.</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📱 Acceso Rápido</h4>
+                                <p>Subdominios dedicados para acceso directo y rápido a la herramienta que necesitas.</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>🔔 Notificaciones</h4>
+                                <p>Alertas sonoras y visuales personalizadas para cada tipo de actividad.</p>
+                            </div>
+                            <div class="feature-card">
+                                <h4>📊 Guías Incluidas</h4>
+                                <p>Información útil y consejos prácticos integrados en cada herramienta.</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -291,9 +528,62 @@
                 <div id="blog-content"></div>
             </div>
         </div>
-    </div>
 
-    <script type="module" src="/src/main.js"></script>
-</body>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>¿Cuánto Falta?</h3>
+                        <p>La plataforma más precisa y confiable para cuentas regresivas en Chile y Latinoamérica.</p>
+                        <div class="social-links">
+                            <a href="#" aria-label="Facebook">📘</a>
+                            <a href="#" aria-label="Twitter">🐦</a>
+                            <a href="#" aria-label="Instagram">📷</a>
+                            <a href="#" aria-label="YouTube">📺</a>
+                        </div>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Servicios</h4>
+                        <ul>
+                            <li><a href="#eventos">Cuentas Regresivas</a></li>
+                            <li><a href="#juegos">Juegos Interactivos</a></li>
+                            <li><a href="#especiales">Herramientas Especiales</a></li>
+                            <li><a href="#blog">Blog Educativo</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Empresa</h4>
+                        <ul>
+                            <li><a href="#nosotros">Quiénes Somos</a></li>
+                            <li><a href="#faq">Preguntas Frecuentes</a></li>
+                            <li><a href="#contacto">Contacto</a></li>
+                            <li><a href="/privacy.html">Política de Privacidad</a></li>
+                            <li><a href="/terms.html">Términos de Servicio</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h4>Herramientas Especiales</h4>
+                        <ul>
+                            <li><a href="https://18.cuantofalta.cl/" target="_blank">Fiestas Patrias</a></li>
+                            <li><a href="https://asado.cuantofalta.cl/" target="_blank">Cronómetro Asado</a></li>
+                            <li><a href="https://bbq.cuantofalta.cl/" target="_blank">Timer BBQ</a></li>
+                            <li><a href="https://merluzo.cuantofalta.cl/" target="_blank">Timer Pescados</a></li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 ¿Cuánto Falta? Todos los derechos reservados.</p>
+                    <p>Hecho con ❤️ en Chile para el mundo</p>
+                </div>
+            </div>
+        </footer>
+
+        <script type="module" src="/src/main.js"></script>
+    </body>
 </html>
-
